@@ -32,7 +32,7 @@ Implementation using C or pyhton code
 ## PROGRAM:
 PROGRAM:
 CaearCipher.
-``
+```
 #include <stdio.h>
 #include <string.h>
 
@@ -78,10 +78,12 @@ int main()
 
     return 0;
 }
-``
+```
 
 ## OUTPUT:
 OUTPUT:
+![Uploading Screenshot 2025-03-11 144205.png…]()
+
 Simulating Caesar Cipher
 
 
