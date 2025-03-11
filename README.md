@@ -82,7 +82,8 @@ int main()
 
 ## OUTPUT:
 OUTPUT:
-![Uploading Screenshot 2025-03-11 144205.png…]()
+![Screenshot 2025-03-11 144205](https://github.com/user-attachments/assets/e75713e5-5c9f-4c1e-a079-90e86d2516d6)
+
 
 Simulating Caesar Cipher
 
