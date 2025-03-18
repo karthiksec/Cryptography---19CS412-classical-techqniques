@@ -33,50 +33,48 @@ Implementation using C or pyhton code
 PROGRAM:
 CaearCipher.
 ```
+PROGRAM 01;
 #include <stdio.h>
 #include <string.h>
+#include <conio.h>
+#include <ctype.h>
+void main()
 
-int main()
- {
-    int key;
-    char s[1000];
-
-    printf("Enter a plaintext to encrypt:\n");
-    fgets(s, sizeof(s), stdin);
-    printf("Enter key:\n");
+{
+    char plain[10],cipher[10];
+    int key,i,length;
+    int result;
+    printf("\n Enter the plain text:");
+    scanf("%s", plain);
+    printf("\n Enter the key value:");
     scanf("%d", &key);
-
-    int n = strlen(s);
-
-    for (int i = 0; i < n; i++) 
+    printf("\n \n \t PLAIN TEXt: %s", plain);
+    printf("\n \n \t ENCRYPTED TEXT:");
+    for(i=0, length = strlen(plain); i<length; i++)
     {
-        char c = s[i];
-        if (c >= 'a' && c <= 'z') 
-        {
-            s[i] = 'a' + (c - 'a' + key) % 26;
-        }
-        else if (c >= 'A' && c <= 'Z')
-        {
-            s[i] = 'A' + (c - 'A' + key) % 26;
-        }
-    }
-    printf("Encrypted message: %s\n", s);
+        
+        cipher[i]=plain[i] + key;
+        if (isupper(plain[i]) && (cipher[i] > 'Z'))
+        cipher[i] = cipher[i] - 26;
+        if (islower(plain[i]) && (cipher[i] > 'z'))
+        cipher[i] = cipher[i] - 26;
+        printf("%c", cipher[i]);
 
-    for (int i = 0; i < n; i++)
+    }
+    printf("\n \n \t AFTER DECRYPTION : ");
+    for(i=0;i<length;i++)
     {
-        char c = s[i];
-        if (c >= 'a' && c <= 'z') 
-        {
-            s[i] = 'a' + (c - 'a' - key + 26) % 26; 
-        }
-        else if (c >= 'A' && c <= 'Z')
-        {
-            s[i] = 'A' + (c - 'A' - key + 26) % 26; 
-        }
+        
+        plain[i]=cipher[i]-key;
+        if(isupper(cipher[i])&&(plain[i]<'A'))
+        plain[i]=plain[i]+26;
+        if(islower(cipher[i])&&(plain[i]<'a'))
+        plain[i]=plain[i]+26;
+        printf("%c",plain[i]);
     }
-    printf("Decrypted message: %s\n", s);
+    getch();
 
-    return 0;
+    
 }
 ```
 ## OUTPUT:
