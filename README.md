@@ -79,21 +79,11 @@ int main()
     return 0;
 }
 ```
-
 ## OUTPUT:
 OUTPUT:
 
-![Screenshot 2025-03-11 144205](https://github.com/user-attachments/assets/e75713e5-5c9f-4c1e-a079-90e86d2516d6)
+![Screenshot 2025-03-18 142404](https://github.com/user-attachments/assets/a3b461a6-8f73-4922-9b0f-018be07133f3)
 
-
-
-
-
-Simulating Caesar Cipher
-
-
-Input : karthik
-Encrypted Message : fvmocdf Decrypted Message : QaZXNOQ
 
 ## RESULT:
 The program is executed successfully
