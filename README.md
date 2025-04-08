@@ -307,82 +307,91 @@ The cipher can, be adapted to an alphabet with any number of letters. All arithm
 PROGRAM:
 ```
 #include <stdio.h>
-#include<conio.h>
-#include <ctype.h>
 #include <string.h>
-void encipher();
-void decipher();
-void main()
-{
-    int choice;
-    while(1)
-{
-    printf("\n1. Encrypt Text");
-    printf("\t2. Decrypt Text");
-    printf("\t3. Exit");
-    printf("\n\nEnter Your Choice : ");
-    scanf("%d",&choice);
-    if(choice == 3)
-    exit(0);
-    else if(choice == 1)
-    encipher();
-    else if(choice == 2)
-    decipher();
-    else
-    printf("Please Enter Valid Option.");
+#include <ctype.h>
+
+#define SIZE 2  // Size of the key matrix (2x2 for simplicity)
+
+int keyMatrix[SIZE][SIZE];
+
+void toUpperCase(char *str) {
+    for (int i = 0; str[i]; i++) {
+        str[i] = toupper(str[i]);
+    }
 }
-}
-void encipher()
-{
-    unsigned int i,j;
-    char input[50],key[10];
-    printf("\n\nEnter Plain Text: ");
-    scanf("%s",input);
-    printf("\nEnter Key Value: ");
-    scanf("%s",key);
-    printf("\nResultant Cipher Text: ");
-    for(i=0,j=0;i<strlen(input);i++,j++)
-    {
-        if(j>=strlen(key))
-        {
-            j=0;
+
+void removeSpaces(char *str) {
+    int count = 0;
+    for (int i = 0; str[i]; i++) {
+        if (str[i] != ' ') {
+            str[count++] = str[i];
         }
-        printf("%c",65+(((toupper(input[i])-65)+(toupper(key[j])-65))%26));
+    }
+    str[count] = '\0';
+}
+
+void getKeyMatrix(char *key) {
+    int k = 0;
+    toUpperCase(key);
+    removeSpaces(key);
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            keyMatrix[i][j] = key[k++] - 'A';
+        }
+    }
+}
+
+void encrypt(char *text, char *cipher) {
+    toUpperCase(text);
+    removeSpaces(text);
+    int len = strlen(text);
+    if (len % SIZE != 0) {
+        text[len++] = 'X';  // Padding if needed
+        text[len] = '\0';
     }
     
-}
-void decipher()
-{
-    unsigned int i,j;
-    char input[50],key[10];
-    int value;
-    printf("\n\nEnter Cipher Text: ");
-    scanf("%s",input);
-    printf("\n\nEnter the key value: ");
-    scanf("%s",key);
-    for(i=0,j=0;i<strlen(input);i++,j++)
-    {
-        if(j>=strlen(key))
-        { 
-            j=0;
-            
+    for (int i = 0; i < len; i += SIZE) {
+        for (int row = 0; row < SIZE; row++) {
+            int sum = 0;
+            for (int col = 0; col < SIZE; col++) {
+                sum += keyMatrix[row][col] * (text[i + col] - 'A');
+            }
+            cipher[i + row] = (sum % 26) + 'A';
         }
-        value = (toupper(input[i])-64)-(toupper(key[j])-64);
-        if( value < 0)
-        {
-            value = value * -1;
-        }
-        printf("%c",65 + (value % 26));
-        
     }
+    cipher[len] = '\0';
+}
+
+void printKeyMatrix() {
+    printf("Key Matrix:\n");
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            printf("%d ", keyMatrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    char key[SIZE * SIZE + 1], text[100], cipher[100];
+    
+    printf("Enter key (4 letters): ");
+    scanf("%s", key);
+    getKeyMatrix(key);
+    printKeyMatrix();
+    
+    printf("Enter plaintext: ");
+    scanf("%s", text);
+    
+    encrypt(text, cipher);
+    printf("Ciphertext: %s\n", cipher);
+    
+    return 0;
 }
 ```
 OUTPUT:
-Simulating Hill Cipher
+![Screenshot 2025-04-08 143657](https://github.com/user-attachments/assets/335ab78a-6285-439a-af50-71a07e65e8fb)
 
-
-Input Message : SecurityLaboratory
-Padded Message : SECURITYLABORATORY Encrypted Message : EACSDKLCAEFQDUKSXU Decrypted Message : SECURITYLABORATORY
 ## RESULT:
 The program is executed successfully
 
