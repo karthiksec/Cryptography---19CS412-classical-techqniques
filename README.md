@@ -472,12 +472,8 @@ int main() {
 ```
 ## OUTPUT:
 OUTPUT :
+![Screenshot 2025-04-10 091126](https://github.com/user-attachments/assets/a884b2f6-3742-4d3f-996c-52c0fddf597d)
 
-Simulating Vigenere Cipher
-
-
-Input Message : SecurityLaboratory
-Encrypted Message : NMIYEMKCNIQVVROWXC Decrypted Message : SECURITYLABORATORY
 ## RESULT:
 The program is executed successfully
 
@@ -509,56 +505,56 @@ In the rail fence cipher, the plaintext is written downwards and diagonally on s
 ## PROGRAM:
 
 PROGRAM:
-#include<stdio.h> #include<string.h> #include<stdlib.h> main()
+```
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+int main()
 {
-int i,j,len,rails,count,code[100][1000]; char str[1000];
-printf("Enter a Secret Message\n"); gets(str);
-len=strlen(str);
-printf("Enter number of rails\n"); scanf("%d",&rails); for(i=0;i<rails;i++)
+int i,j,k,l;
+char a[20],c[20],d[20];
+printf("\n\t\t RAIL FENCE TECHNIQUE");
+printf("\n\nEnter the input string : ");
+gets(a);
+l=strlen(a);
+for(i=0,j=0;i<l;i++)
 {
-for(j=0;j<len;j++)
-{
-code[i][j]=0;
+if(i%2==0)
+c[j++]=a[i];
 }
-}
-count=0; j=0;
-while(j<len)
+for(i=0;i<l;i++)
 {
-if(count%2==0)
-{
-for(i=0;i<rails;i++)
-{
-//strcpy(code[i][j],str[j]);
-code[i][j]=(int)str[j]; j++;
+if(i%2==1)
+c[j++]=a[i];
 }
-
-}
+c[j]='\0';
+printf("\nCipher text after applying rail fence :");
+printf("\n%s",c);
+if(l%2==0)
+k=l/2;
 else
+k=(l/2)+1;
+for(i=0,j=0;i<k;i++)
 {
- 
-for(i=rails-2;i>0;i--)
+d[j]=c[i];
+j=j+2;
+}
+for(i=k,j=1;i<l;i++)
 {
-code[i][j]=(int)str[j]; j++;
+d[j]=c[i];
+j=j+2;
 }
+d[l]='\0';
+printf("\nText after decryption : ");
+printf("%s",d);
+return 0;
 }
-
-count++;
-}
-
-for(i=0;i<rails;i++)
-{
-for(j=0;j<len;j++)
-{
-if(code[i][j]!=0) printf("%c",code[i][j]);
-}
-}
-printf("\n");
-}
+```
 ## OUTPUT:
 OUTPUT:
-Enter a Secret Message wearediscovered
-Enter number of rails 2
-waeicvrderdsoee
+
+![Screenshot 2025-04-10 091628](https://github.com/user-attachments/assets/4effaf57-4eb6-4997-b185-3a8d1a7ae1db)
+
 ## RESULT:
 The program is executed successfully
 
